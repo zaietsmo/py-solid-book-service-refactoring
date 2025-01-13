@@ -1,7 +1,10 @@
-from models import Book
 from displayers import ConsoleDisplayer, ReverseDisplayer
-from printers import ConsolePrinter, ReversePrinter
-from serializers import JsonSerializer, XmlSerializer
+from models import Book
+from printers import ConsolePrinter, Printer, ReversePrinter
+from serializers import JsonSerializer, Serializer, XmlSerializer
+
+from app.display import Displayer
+
 
 def main(book: Book, commands: list[tuple[str, str]]) -> None | str:
     for cmd, method_type in commands:
@@ -17,7 +20,8 @@ def main(book: Book, commands: list[tuple[str, str]]) -> None | str:
         else:
             raise ValueError(f"Unknown command: {cmd}")
 
-def get_displayer(method_type: str):
+
+def get_displayer(method_type: str) -> Displayer:
     if method_type == "console":
         return ConsoleDisplayer()
     elif method_type == "reverse":
@@ -25,7 +29,8 @@ def get_displayer(method_type: str):
     else:
         raise ValueError(f"Unknown display type: {method_type}")
 
-def get_printer(method_type: str):
+
+def get_printer(method_type: str) -> Printer:
     if method_type == "console":
         return ConsolePrinter()
     elif method_type == "reverse":
@@ -33,13 +38,15 @@ def get_printer(method_type: str):
     else:
         raise ValueError(f"Unknown print type: {method_type}")
 
-def get_serializer(method_type: str):
+
+def get_serializer(method_type: str) -> Serializer:
     if method_type == "json":
         return JsonSerializer()
     elif method_type == "xml":
         return XmlSerializer()
     else:
         raise ValueError(f"Unknown serialize type: {method_type}")
+
 
 if __name__ == "__main__":
     sample_book = Book("Sample Book", "This is some sample content.")
