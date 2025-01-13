@@ -1,9 +1,9 @@
-from displayers import ConsoleDisplayer, ReverseDisplayer
-from models import Book
-from printers import ConsolePrinter, Printer, ReversePrinter
-from serializers import JsonSerializer, Serializer, XmlSerializer
+from app.displayers import ConsoleDisplayer, ReverseDisplayer
+from app.models import Book
+from app.printers import ConsolePrinter, Printer, ReversePrinter
+from app.serializers import JsonSerializer, Serializer, XmlSerializer
 
-from app.display import Displayer
+from app.displayers import Displayer
 
 
 def main(book: Book, commands: list[tuple[str, str]]) -> None | str:
